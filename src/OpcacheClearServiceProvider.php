@@ -35,6 +35,6 @@ class OpcacheClearServiceProvider extends ServiceProvider {
             ]);
         }
 
-        $this->commands(["command.opcache:clear"]);
+        $this->commands(["command.opcache:clear",OpcacheWatchCommand::class]);
     }
 }

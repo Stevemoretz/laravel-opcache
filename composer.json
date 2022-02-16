@@ -1,11 +1,12 @@
 {
-    "name": "steve-moretz/laravel-opcache-clear",
+    "name": "steve-moretz/laravel-opcache",
     "description": "This package allows you to clear OPcache from CLI.",
     "type": "package",
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": ">=7.0",
-        "guzzlehttp/guzzle": ">=5.3.0"
+        "guzzlehttp/guzzle": ">=5.3.0",
+        "steve-moretz/file-system-watcher" : ">=1.0.2"
     },
     "keywords":
         [

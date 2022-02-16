@@ -11,6 +11,7 @@ class OpcacheClearController extends Controller {
     protected function opcacheClear(Request $request) {
         $original = config("app.key");
 
+
         $result = false;
         $reason = null;
 
@@ -24,8 +25,19 @@ class OpcacheClearController extends Controller {
         if (!function_exists("opcache_reset")) {
             $result = false;
             $reason = "Looke like opcache is not enabled!";
-        } elseif ($decrypted == $original && opcache_reset()) {
-            $result = true;
+        } elseif ($decrypted == $original) {
+            if($request->has("update_file")){
+                $updated_file = $request->get( "update_file" );
+                if(file_exists($updated_file)){
+                    opcache_invalidate( $updated_file );
+                    opcache_compile_file( $updated_file );
+                }
+                $result = true;
+            }else{
+                if(opcache_reset()){
+                    $result = true;
+                }
+            }
         }
 
         return response()->json(compact("result", "reason"));
