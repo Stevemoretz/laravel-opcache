@@ -1,34 +1,32 @@
 <?php
 
-namespace MicheleCurletta\LaravelOpcacheClear;
+namespace SteveMoretz\LaravelOpcacheClear;
 
 use Illuminate\Console\Command;
 use GuzzleHttp\Client;
 use Crypt;
 
-class OpcacheClearCommand extends Command
-{
+class OpcacheClearCommand extends Command {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'opcache:clear';
+    protected $signature = "opcache:clear";
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Clear OpCache';
+    protected $description = "Clear OpCache";
 
     /**
      * Create a new command instance.
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
     }
 
@@ -37,24 +35,29 @@ class OpcacheClearCommand extends Command
      *
      * @return mixed
      */
-    public function handle()
-    {
-        $client = new Client;
-        $request = $client->createRequest('GET', config('app.url', 'http://localhost'));
-        $request->setPath('/opcache-clear');
-
-        $originalToken = config('app.key');
-
+    public function handle() {
+        $originalToken = config("app.key");
         $encryptedToken = Crypt::encrypt($originalToken);
 
-        $request->getQuery()->set('token', $encryptedToken);
+        $response = \Http::get(
+            config("opcache.base_url", "http://localhost") . "/opcache-clear",
+            [
+                "token" => $encryptedToken,
+            ]
+        )->json();
 
-        $response = $client->send($request);
+        if ($response["result"]) {
+            $this->line("Cache was successfully cleared!");
 
-        if(($response->json()['result']))
-            $this->line('So far, so good.');
-        else
-            $this->line('Ooops!');
+            return Command::SUCCESS;
+        }
 
+        if ($response["reason"]) {
+            $this->error($response["reason"]);
+        } else {
+            $this->error("Unexpected error!");
+        }
+
+        return Command::INVALID;
     }
 }

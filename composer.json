@@ -25,7 +25,14 @@
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-            "MicheleCurletta\\LaravelOpcacheClear\\": "src"
+            "SteveMoretz\\LaravelOpcacheClear\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SteveMoretz\\LaravelOpcacheClear\\OpcacheClearServiceProvider"
+            ]
         }
     }
 }
