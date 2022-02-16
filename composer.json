@@ -1,5 +1,5 @@
 {
-    "name": "michelecurletta/laravel-opcache-clear",
+    "name": "steve-moretz/laravel-opcache-clear",
     "description": "This package allows you to clear OPcache when running PHP in FPM mode.",
     "type": "package",
     "require": {
