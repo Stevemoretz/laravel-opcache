@@ -2,9 +2,8 @@
 
 namespace SteveMoretz\LaravelOpcacheClear;
 
-use Illuminate\Console\Command;
-use GuzzleHttp\Client;
 use Crypt;
+use Illuminate\Console\Command;
 
 class OpcacheClearCommand extends Command {
     /**
