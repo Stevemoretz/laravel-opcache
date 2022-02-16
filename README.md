@@ -25,8 +25,24 @@ Now you can go ahead and change the website url if necessary.
 
 ### Usage
 
+###Clear
+
 ```bash
 php artisan opcache:clear
+```
+
+###Watch Invalidate Cache
+
+First you need to install
+
+```bash
+yarn add chokidar
+```
+
+then you can run
+
+```bash
+php artisan opcache:watch
 ```
 
 ### Suggestion

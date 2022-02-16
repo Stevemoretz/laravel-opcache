@@ -49,12 +49,12 @@ class OpcacheClearCommand extends Command {
             $this->line("Cache was successfully cleared!");
 
             return Command::SUCCESS;
-        }
-
-        if ($response["reason"]) {
-            $this->error($response["reason"]);
-        } else {
-            $this->error("Unexpected error!");
+        }else{
+            if ($response["reason"]) {
+                $this->error($response["reason"]);
+            } else {
+                $this->error("Unexpected error!");
+            }
         }
 
         return Command::INVALID;
