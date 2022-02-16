@@ -23,7 +23,7 @@ php artisan vendor:publish --provider="SteveMoretz\LaravelOpcacheClear\OpcacheCl
 
 Now you can go ahead and change the website url if necessary.
 
-### Usage
+## Usage
 
 ### Clear
 
@@ -33,13 +33,20 @@ php artisan opcache:clear
 
 ### Watch Invalidate Cache
 
-First you need to install
+1. First you need to install
 
 ```bash
 yarn add chokidar
 ```
 
-then you can run
+2. Now can goto `config/opcache.php` and set watch_globs to list of directories and files you want to watch.
+
+eg : 
+```
+    "watch_globs" => [__DIR__ . "/../../**/*.php"]
+```
+
+3. Now you can run
 
 ```bash
 php artisan opcache:watch

@@ -38,7 +38,7 @@ class OpcacheWatchCommand extends Command {
      * @return mixed
      */
     public function handle() {
-        Watch::paths(__DIR__ . "/../../../../../../../../**/*.php")
+        Watch::paths(...config("opcache.watch_globs"))
              ->onFileUpdated(function (string $newFilePath) {
                  $originalToken = config("app.key");
                  $encryptedToken = Crypt::encrypt($originalToken);
