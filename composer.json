@@ -1,5 +1,5 @@
 {
-    "name": "steve-moretz/laravel-opcache-clear",
+    "name": "steve-moretz/laravel-opcache",
     "description": "This package allows you to clear OPcache from CLI.",
     "type": "package",
     "require": {
